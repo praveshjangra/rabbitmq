@@ -1,0 +1,88 @@
+{
+  "rabbit_version":"3.6.15",
+  "users": [
+	
+	{
+      "name":"axon",
+      "password_hash":"52ArprgAuVw3sB++YIvgB0F2ZSPRL3d6U3BwEUWImDR/Om6B",
+      "hashing_algorithm":"rabbit_password_hashing_sha256",
+      "tags":"administrator"
+    }
+	
+  ],
+  "vhosts": [
+    {
+      "name":"/"
+    }
+  ],
+  "permissions":[
+    {
+      "user":"axon",
+      "vhost":"/",
+      "configure":".*",
+      "write":".*",
+      "read":".*"
+    },
+	{
+      "user":"axon",
+      "vhost":"/",
+      "configure":".*",
+      "write":".*",
+      "read":".*"
+    }
+  ],
+  "parameters":[],
+  "policies":[
+    {"vhost":"/","name":"ha-all","pattern":"", "definition":{"ha-mode":"all","ha-sync-mode":"automatic","ha-sync-batch-size":5}}
+  ],
+  "queues": [
+  
+    {"name":"axon_workflow","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"lineage_new","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"axon_admin_audit","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"axon_dq_automation","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"axon_uploaddata","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"validateJobs","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"preValidateJobs","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"jobProgress","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"commitJobs","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"axonMarketplaceQueue","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},
+     {"name":"segmentation_precompute","vhost":"/","durable":true,"auto_delete":false,"arguments":{}}
+	 ],
+  
+  
+  "exchanges": [
+
+{"name":"preValidationJobs","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"results","vhost":"/","type":"direct","durable":false,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"keepalives","vhost":"/","type":"direct","durable":false,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_indexing_uploaddata","vhost":"/","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"commitJobs","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_log_java","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_workflow","vhost":"/","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_dq_automation","vhost":"/","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_indexing_lineage","vhost":"/","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"validationJobs","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axon_admin_audit","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"jobProgress","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"axonMarketplaceQueue","vhost":"/","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}},
+{"name":"segmentation_precompute","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}}
+
+],
+  "bindings":[
+ 
+   {"source":"axonMarketplaceQueue","vhost":"/","destination":"axonMarketplaceQueue","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"axon_admin_audit","vhost":"/","destination":"axon_admin_audit","destination_type":"queue","routing_key":"admin_audit","arguments":{}},
+   {"source":"axon_dq_automation","vhost":"/","destination":"axon_dq_automation","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"axon_indexing_lineage","vhost":"/","destination":"lineage_new","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"axon_indexing_uploaddata","vhost":"/","destination":"axon_uploaddata","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"axon_workflow","vhost":"/","destination":"axon_workflow","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"commitJobs","vhost":"/","destination":"commitJobs","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"jobProgress","vhost":"/","destination":"jobProgress","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"preValidationJobs","vhost":"/","destination":"preValidateJobs","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"validationJobs","vhost":"/","destination":"validateJobs","destination_type":"queue","routing_key":"","arguments":{}},
+   {"source":"segmentation_precompute","vhost":"/","destination":"segmentation_precompute","destination_type":"queue","routing_key":"segment_precompute","arguments":{}}
+  ]
+
+   }
+  
