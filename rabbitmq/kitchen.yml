@@ -54,7 +54,7 @@ platforms:
 
 
 suites:
-  - name: node1
+  - name: default
     driver:
       run_options: -p 15672:15672
       run_options: -p 15671:15671
@@ -67,16 +67,3 @@ suites:
       inspec_tests:
        - test/integration/default
     attributes:
-           rabbitmq:
-              clustering:
-               cluster_nodes: ["rabbitmq1","rabbitmq2"]
-  - name: node2
-    driver:
-     instance_name: rabbitmq2
-    run_list:
-       - recipe[rabbitmq]
-    verifier:
-      inspec_tests:
-       - test/integration/default
-    attributes:
-
